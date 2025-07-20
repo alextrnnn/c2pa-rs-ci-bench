@@ -1,5 +1,5 @@
 use std::io::Cursor;
-
+use std::{thread, time};
 use c2pa::{Builder, CallbackSigner, SigningAlg};
 use criterion::{criterion_group, criterion_main, Criterion};
 const CERTS: &[u8] = include_bytes!("../tests/fixtures/certs/ed25519.pub");
@@ -16,7 +16,10 @@ fn signing(c: &mut Criterion) {
     let format = "image/jpeg";
 
     group.sample_size(500);
-    group.bench_function("sign 100kb jpeg", |b| b.iter(||builder.sign(&signer, format,&mut source,&mut dest)));
+    group.bench_function("sign 100kb jpeg", |b| b.iter(|| {
+        thread::sleep(time::Duration::from_millis(10));
+        builder.sign(&signer, format,&mut source,&mut dest);
+    }));
 }
 
 criterion_group!(benches, signing);
