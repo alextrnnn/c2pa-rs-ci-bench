@@ -5,7 +5,6 @@ use criterion::{criterion_group, criterion_main, Criterion};
 const CERTS: &[u8] = include_bytes!("../tests/fixtures/certs/ed25519.pub");
 const PRIVATE_KEY: &[u8] = include_bytes!("../tests/fixtures/certs/ed25519.pem");
 fn signing(c: &mut Criterion) {
-    let mut group = c.benchmark_group("signing");
     let mut builder = Builder::new();
 
     let ed_signer =
@@ -15,10 +14,9 @@ fn signing(c: &mut Criterion) {
     let mut dest = Cursor::new(Vec::new());
     let format = "image/jpeg";
 
-    group.sample_size(500);
-    group.bench_function("sign 100kb jpeg", |b| b.iter(|| {
+    c.bench_function("sign 100kb jpeg", |b| b.iter(|| {
         thread::sleep(time::Duration::from_millis(10));
-        builder.sign(&signer, format,&mut source,&mut dest);
+        builder.sign(&signer, format,&mut source,&mut dest)
     }));
 }
 
