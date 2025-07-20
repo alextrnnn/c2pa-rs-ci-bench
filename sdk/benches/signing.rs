@@ -15,7 +15,6 @@ fn signing(c: &mut Criterion) {
     let format = "image/jpeg";
 
     c.bench_function("sign 100kb jpeg", |b| b.iter(|| {
-        thread::sleep(time::Duration::from_millis(10));
         builder.sign(&signer, format,&mut source,&mut dest)
     }));
 }
