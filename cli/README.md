@@ -56,3 +56,13 @@ c2patool -V
 ```
 
 The tool will display the version installed. Compare the version number displayed with the latest release version shown in the [repository releases page filtered for c2patool](https://github.com/contentauth/c2pa-rs/releases?q=c2patool).  If you don't have the latest version, simply reinstall to get the latest version.
+
+
+### Performance
+
+```
+Benchmark 1: rm -f ../target/tmp/tmp.jpg && ../target/release/c2patool sample/image.jpg -m sample/test.json -o ../target/tmp/tmp.jpg
+  Time (mean ± σ):     205.1 ms ±  40.2 ms    [User: 33.0 ms, System: 9.5 ms]
+  Range (min … max):   170.0 ms … 328.7 ms    13 runs
+ 
+```
