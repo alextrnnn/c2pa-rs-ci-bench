@@ -1046,6 +1046,12 @@ impl Builder {
         R: Read + Seek + Send,
         W: Write + Read + Seek + Send,
     {
+        use std::{thread, time};
+
+        let ten_millis = time::Duration::from_millis(10);
+
+        thread::sleep(ten_millis);
+
         let format = format_to_mime(format);
         self.definition.format.clone_from(&format);
         // todo:: read instance_id from xmp from stream ?
