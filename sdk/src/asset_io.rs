@@ -27,7 +27,7 @@ pub enum HashBlockObjectType {
     Xmp,
     Other,
 }
-
+// Unrelated change
 impl fmt::Display for HashBlockObjectType {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "{self:?}")
