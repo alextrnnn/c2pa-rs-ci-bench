@@ -441,20 +441,10 @@ jobs:
   
   benchmarks:
     name: Test performance on benchmarks
-    if: |
-      github.event_name != 'pull_request' ||
-      github.event.pull_request.author_association == 'COLLABORATOR' ||
-      github.event.pull_request.author_association == 'MEMBER' ||
-      github.event.pull_request.user.login == 'dependabot[bot]' ||
-      contains(github.event.pull_request.labels.*.name, 'safe to test')
-
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
-      - name: Cache Rust dependencies
-        uses: Swatinem/rust-cache@v2
-        
+
       - name: Setup rust toolchain, cache and cargo-codspeed binary
         uses: moonrepo/setup-rust@v1
         with:
@@ -470,7 +460,7 @@ jobs:
         with:
           run: cargo codspeed run
           token: ${{ secrets.CODSPEED_TOKEN }}
-          
+
   clippy_check:
     name: Clippy
     needs: get-features
