@@ -14,7 +14,9 @@
 #[cfg(feature = "file_io")]
 use std::path::{Path, PathBuf};
 use std::{
-    collections::HashMap, hint::black_box, io::{Read, Seek, Write}
+    collections::HashMap,
+    hint::black_box,
+    io::{Read, Seek, Write},
 };
 
 use async_generic::async_generic;
@@ -1045,13 +1047,10 @@ impl Builder {
         R: Read + Seek + Send,
         W: Write + Read + Seek + Send,
     {
-        use std::time;
-
-        let ten_millis = time::Duration::from_millis(10);
-        let now = time::Instant::now();
-    
+        let mut count = 0;
         loop {
-            if black_box(now.elapsed() >= ten_millis){
+            black_box(count += 1);
+            if count >= 10000000 {
                 break;
             }
         }
