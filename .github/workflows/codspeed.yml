@@ -12,7 +12,7 @@ on:
 jobs:
   codspeed:
     name: Run benchmarks
-    runs-on: ubuntu-latest
+    runs-on: codspeed-macro
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
